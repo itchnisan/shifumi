@@ -2,6 +2,7 @@
 
 let box = document.getElementsByClassName("box"); 
 
+
 let boxChoix = box[0]; 
 
 let boxResultat = document.getElementById("resultat"); 
@@ -14,9 +15,15 @@ let resultatGagnant = document.createElement('p');
 
 
 
-function onChoix(textChoix){
+for(let choix of (boxChoix.childNodes)){
+    console.log(choix.textContent); 
 
-    resultatChoix.textContent = "choix joueur : " + textChoix; 
+    choix.addEventListener("click", ()=>onChoix(choix.textContent)); 
+}   
+
+function onChoix(textChoix){                                                                            
+
+    resultatChoix.textContent = ("choix joueur : " + textChoix); 
 
     let valeurAleatoir = Math.floor(Math.random() * 3);
 
@@ -27,7 +34,7 @@ function onChoix(textChoix){
     switch(valeurAleatoir){
 
         case(0) :
-            resultatOrdi.textContent += "Feuille"; 
+            resultatOrdi.textContent += "Feuilles"; 
 
             if(textChoix == "Feuille"){
                 resultatGagnant.textContent += "égalité"; 
@@ -44,7 +51,7 @@ function onChoix(textChoix){
             resultatOrdi.textContent += "Pierre"; 
 
             
-            if(textChoix == "Feuille"){
+            if(textChoix == "Feuilles"){
                 resultatGagnant.textContent += "gagné"; 
             }
             else if(textChoix == "Pierre"){
@@ -59,7 +66,7 @@ function onChoix(textChoix){
         case(2) :
             resultatOrdi.textContent += "Ciseaux"; 
 
-            if(textChoix == "Feuille"){
+            if(textChoix == "Feuilles"){
                 resultatGagnant.textContent += "perdu"; 
             }
             else if(textChoix == "Pierre"){
@@ -72,14 +79,12 @@ function onChoix(textChoix){
             break;     
     }
 
-    document.body.appendChild(resultatChoix); 
-    document.body.appendChild(resultatOrdi); 
-    document.body.appendChild(resultatGagnant); 
+    boxResultat.appendChild(resultatChoix); 
+    boxResultat.appendChild(resultatOrdi); 
+    boxResultat.appendChild(resultatGagnant); 
     
 }
 
 
 
-for(let choix of boxChoix.childNodes){
-    choix.addEventListener("click", onChoix(choix.textContent)); 
-}   
+
